@@ -25,7 +25,7 @@ Route::group(['middleware' => ['api'], 'as' => 'api.'], function () {
     }
 
     if ((\App::environment('local', 'staging') && ($origin == "http://localhost:4200"))
-        || $origin == env('CLIENT_URL')) {
+        || $origin == env('CLIENT_URL') || $origin == "http://lablog.loc") {
         // cors not working from middleware
         header('Access-Control-Allow-Origin:  *');
         header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PATCH, PUT, DELETE');
