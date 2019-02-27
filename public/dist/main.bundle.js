@@ -1533,7 +1533,6 @@ var PostCreateComponent = (function () {
             this.toastrService.add("error", "Form not valid! Try once more");
         }
         else {
-            debugger;
             this.postService.savePost(this.post).subscribe(function (response) {
                 if (_this.fileEvent) {
                     _this.fileUpload.fileUpload(_this.fileEvent, response.post)
@@ -1987,7 +1986,6 @@ var RegisterComponent = (function () {
     };
     RegisterComponent.prototype.register = function () {
         var _this = this;
-        debugger;
         this.loading = true;
         this.authenticationService.register(this.model.name, this.model.email, this.model.password, this.model.confirm)
             .subscribe(function (result) {
@@ -2660,7 +2658,6 @@ var AuthenticationService = (function () {
      */
     AuthenticationService.prototype.register = function (name, email, password, confirm) {
         var _this = this;
-        debugger;
         return this.http.post(__WEBPACK_IMPORTED_MODULE_3__config_app__["a" /* app */].api_url + "/api/register", {
             name: name,
             email: email,
@@ -2668,7 +2665,6 @@ var AuthenticationService = (function () {
             password_confirmation: confirm
         })
             .map(function (response) {
-            debugger;
             // register successful if there's a jwt token in the response
             var token = response.json() && response.json().token;
             if (token) {
@@ -3118,7 +3114,7 @@ var ValidationService = (function () {
             'required': 'Required',
             'invalidCreditCard': 'Is invalid credit card number',
             'invalidEmailAddress': 'Invalid email address',
-            'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
+            'invalidPassword': 'Invalid password. Password must be at least 5 characters long, and contain a number.',
             'minlength': "Minimum length " + validatorValue.requiredLength
         };
         return config[validatorName];
@@ -3144,7 +3140,7 @@ var ValidationService = (function () {
     ValidationService.passwordValidator = function (control) {
         // {6,100}           - Assert password is between 6 and 100 characters
         // (?=.*[0-9])       - Assert a string has at least one number
-        if (control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {
+        if (control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{5,100}$/)) {
             return null;
         }
         else {
